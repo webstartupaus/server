@@ -16,20 +16,21 @@ app.use(
 );
 
 app.get('/', async (req, res) => {
-    try {
-        const db = client.db('sample_guides');
-        const planets = await db.collection('planets').find({}).toArray();
-        console.log(planets);
-        res.send(planets).status(200);
-        return;
-    }
-    catch(e) {
-        console.log(e);
-    }
+    console.log('a ok');
+    // try {
+    //     const db = client.db('sample_guides');
+    //     const planets = await db.collection('planets').find({}).toArray();
+    //     console.log(planets);
+    //     res.send(planets).status(200);
+    //     return;
+    // }
+    // catch(e) {
+    //     console.log(e);
+    // }
 });
 
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
