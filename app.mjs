@@ -7,6 +7,10 @@ import { MongoClient } from 'mongodb';
 const app = express();
 const client = new MongoClient(process.env.MONGO_URL);
 
+async function connect() {
+    await client.connect();
+}
+
 app.use(bodyParser.json());
 
 app.use(
@@ -16,10 +20,13 @@ app.use(
 );
 
 app.get('/', async (req, res) => {
+    await connect();
+
     try {
         const db = client.db('sample_guides');
-        // const planets = await db.collection('planets').find({}).toArray();
+        const planets = await db.collection('planets').find({}).toArray();
         console.log('MU: ', db);
+        console.log('MU: ', planets);
         res.send('planets').status(200);
         return;
     }
