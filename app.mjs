@@ -1,11 +1,11 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
-import { MongoClient } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 dotenv.config();
 
 const app = express();
-const client = new MongoClient(process.env.MONGO_URL);
+// const client = new MongoClient(process.env.MONGO_URL);
 
 app.use(bodyParser.json());
 
