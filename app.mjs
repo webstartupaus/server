@@ -14,9 +14,9 @@ axios.get('https://thewinklers-3cdfbdc10525.herokuapp.com', {
         protocol: 'http',
         host: myURL.hostname,
         port: myURL.port,
-        auth: {username: myURL.username, password: myURL.password}
+        auth: { username: myURL.username, password: myURL.password }
     }
-}).then(response => console.log(response.status));
+}).then(response => console.log('axios: ', response.status));
 
 const client = new MongoClient(process.env.MONGO_URL);
 
@@ -34,7 +34,7 @@ app.use(
 
 app.get('/', async (req, res) => {
     // await connect();
-
+    console.log('get');
     res.send('planets').status(200);
 
     // try {
