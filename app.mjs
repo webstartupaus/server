@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from 'body-parser';
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 // import { MongoClient } from 'mongodb';
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 // const client = new MongoClient(process.env.MONGO_URL);
@@ -19,6 +19,7 @@ app.get('/', async (req, res) => {
     try {
         // const db = client.db('sample_guides');
         // const planets = await db.collection('planets').find({}).toArray();
+        console.log('MU', process.env.MONGO_URL);
         res.send('planets').status(200);
         return;
     }
