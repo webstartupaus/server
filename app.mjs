@@ -27,6 +27,7 @@ app.get('/', async (req, res) => {
     // catch(e) {
     //     console.log(e);
     // }
+    res.send('planets').status(200);
 });
 
 const PORT = process.env.PORT || 5001;
