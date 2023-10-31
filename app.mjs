@@ -17,9 +17,9 @@ app.use(
 
 app.get('/', async (req, res) => {
     try {
-        const db = client.db('sample_guides');
-        const planets = await db.collection('planets').find({}).toArray();
-        res.send(planets).status(200);
+        // const db = client.db('sample_guides');
+        // const planets = await db.collection('planets').find({}).toArray();
+        res.send('planets').status(200);
         return;
     }
     catch(e) {
