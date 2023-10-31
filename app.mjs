@@ -1,10 +1,25 @@
-import express from "express";
+import express, { response } from "express";
 import bodyParser from 'body-parser';
-// import dotenv from "dotenv";
+import axios from "axios";
+import dotenv from "dotenv";
 import { MongoClient } from 'mongodb';
-// dotenv.config();
+dotenv.config();
 
 const app = express();
+
+const myURL = new URL(process.env.FIXIE_URL);
+
+if (!process.env.PORT) {
+    axios.get('https://thewinklers-3cdfbdc10525.herokuapp.com', {
+        proxy: {
+            protocol: 'http',
+            host: myURL.hostname,
+            port: myURL.port,
+            auth: {username: myURL.username, password: myURL.password}
+        }
+    }).then(response => console.log(response.status));
+}
+
 const client = new MongoClient(process.env.MONGO_URL);
 
 async function connect() {
