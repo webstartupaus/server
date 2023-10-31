@@ -16,18 +16,16 @@ app.use(
 );
 
 app.get('/', async (req, res) => {
-    console.log('a ok');
-    // try {
-    //     const db = client.db('sample_guides');
-    //     const planets = await db.collection('planets').find({}).toArray();
-    //     console.log(planets);
-    //     res.send(planets).status(200);
-    //     return;
-    // }
-    // catch(e) {
-    //     console.log(e);
-    // }
-    res.send('planets').status(200);
+    try {
+        const db = client.db('sample_guides');
+        const planets = await db.collection('planets').find({}).toArray();
+        res.send(planets).status(200);
+        return;
+    }
+    catch(e) {
+        console.log(e);
+        res.send(e).status(500);
+    }
 });
 
 const PORT = process.env.PORT || 5001;
