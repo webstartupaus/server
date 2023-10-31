@@ -18,13 +18,13 @@ app.use(
 app.get('/', async (req, res) => {
     try {
         const db = client.db('sample_guides');
-        // const planets = await db.collection('planets').find({}).toArray();
-        console.log('MU', db);
+        const planets = await db.collection('planets').find({}).toArray();
+        console.log('MU: ', planets);
         res.send('planets').status(200);
         return;
     }
     catch(e) {
-        console.log(e);
+        console.log('error: ', e);
         res.send(e).status(500);
     }
 });
