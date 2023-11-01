@@ -1,18 +1,11 @@
-import express, { response } from "express";
+import express from "express";
 import bodyParser from 'body-parser';
-// import dotenv from "dotenv";
-// import mongoose from "mongoose";
-import { MongoClient } from 'mongodb';
-// dotenv.config();
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+
+dotenv.config();
 
 const app = express();
-
-// let client;
-const client = new MongoClient(process.env.MONGO_URL);
-
-async function connect() {
-    await client.connect();
-}
 
 app.use(bodyParser.json());
 
@@ -22,27 +15,21 @@ app.use(
     }),
 );
 
-app.get('/', async (req, res) => {
-    connect();
+async function dbConnect() {
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => console.log('Success connecting to Atlas!'))
+        .catch((error) => console.log('Error connecting to Atlas', error));
+}
+
+dbConnect();
+
+app.post('/', async (req, res) => {
+    res.send('ok').status(200);
+});
+
+app.post('/login', async (req, res) => {
     console.log('get: ', client);
     res.send('planets').status(200);
-
-    // await connect();
-    // console.log('get: ', client);
-    // res.send('planets').status(200);
-
-    // try {
-    //     const db = client.db('sample_guides');
-    //     const planets = await db.collection('planets').find({}).toArray();
-    //     console.log('MU: ', db);
-    //     console.log('MU: ', planets);
-    //     res.send('planets').status(200);
-    //     return;
-    // }
-    // catch(e) {
-    //     console.log('error: ', e);
-    //     res.send(e).status(500);
-    // }
 });
 
 const PORT = process.env.PORT || 5001;
