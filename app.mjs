@@ -11,23 +11,15 @@ const myURL = new URL(process.env.FIXIE_URL);
 
 let client;
 
-axios.get('https://thewinklers-3cdfbdc10525.herokuapp.com', {
-    proxy: {
-        protocol: 'http',
-        host: myURL.hostname,
-        port: myURL.port,
-        auth: { username: myURL.username, password: myURL.password }
-    }
-}).then(response => {
-    console.log('axios: ', response.status);
-    client = new MongoClient(process.env.MONGO_URL);
-});
-
-// const client = new MongoClient(process.env.MONGO_URL);
-
 async function connect() {
     await client.connect();
 }
+
+
+
+// const client = new MongoClient(process.env.MONGO_URL);
+
+
 
 app.use(bodyParser.json());
 
@@ -38,9 +30,25 @@ app.use(
 );
 
 app.get('/', async (req, res) => {
-    await connect();
-    console.log('get: ', client);
-    res.send('planets').status(200);
+
+    axios.get('https://thewinklers-3cdfbdc10525.herokuapp.com', {
+        proxy: {
+            protocol: 'http',
+            host: myURL.hostname,
+            port: myURL.port,
+            auth: { username: myURL.username, password: myURL.password }
+        }
+    }).then(response => {
+        console.log('axios: ', response.status);
+        client = new MongoClient(process.env.MONGO_URL);
+        connect();
+        console.log('get: ', client);
+        res.send('planets').status(200);
+    });
+    
+    // await connect();
+    // console.log('get: ', client);
+    // res.send('planets').status(200);
 
     // try {
     //     const db = client.db('sample_guides');
