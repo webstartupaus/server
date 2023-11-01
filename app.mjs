@@ -23,7 +23,7 @@ app.use(
 
 // dbConnect();
 
-app.post('/', async (req, res) => {
+app.get('/', async (req, res) => {
     res.send('ok').status(200);
 });
 
