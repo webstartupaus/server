@@ -1,7 +1,6 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -15,20 +14,17 @@ app.use(
     }),
 );
 
-async function dbConnect() {
-    mongoose.connect(process.env.MONGO_URI)
-        .then(() => console.log('Success connecting to Atlas!'))
-        .catch((error) => console.log('Error connecting to Atlas', error));
-}
-
-dbConnect();
 
 app.get('/', async (req, res) => {
     res.send('ok').status(200);
 });
 
 app.post('/login', async (req, res) => {
-    console.log('get: ', client);
+    const planets = await fetch('https://ap-southeast-2.aws.data.mongodb-api.com/app/data-ofcmr/endpoint/planet', {
+        method: 'post',
+        body: 'planet nine'
+    });
+
     res.send('planets').status(200);
 });
 
