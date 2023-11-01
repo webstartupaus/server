@@ -15,13 +15,13 @@ app.use(
     }),
 );
 
-// async function dbConnect() {
-//     mongoose.connect(process.env.MONGO_URI)
-//         .then(() => console.log('Success connecting to Atlas!'))
-//         .catch((error) => console.log('Error connecting to Atlas', error));
-// }
+async function dbConnect() {
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => console.log('Success connecting to Atlas!'))
+        .catch((error) => console.log('Error connecting to Atlas', error));
+}
 
-// dbConnect();
+dbConnect();
 
 app.get('/', async (req, res) => {
     res.send('ok').status(200);
