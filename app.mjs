@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
     res.send('ok').status(200);
 });
 
-app.post('/login', async (req, res) => {
+app.get('/login', async (req, res) => {
     const planets = await fetch('https://ap-southeast-2.aws.data.mongodb-api.com/app/data-ofcmr/endpoint/planet', {
         method: 'post',
         body: 'planet nine'
